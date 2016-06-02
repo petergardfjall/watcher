@@ -1,0 +1,33 @@
+{
+    "pingers": [
+        {
+            "name": "google.com",
+            "type": "http",
+            "check": {
+                "url": "https://www.google.com",
+                "expect": {
+                    "statusCode": 200
+                },
+                "timeout": "10s"                
+            },
+            "schedule": {
+                "interval": "1m",
+                "retries": {
+                    "attempts": 3,
+                    "delay": "10s",
+                    "exponentialBackoff": false
+                }
+            }
+        }        
+    ],
+    "alerter": {
+        "reminderDelay": "12h",
+        "email": {
+            "smtpHost": "smtp.server",
+            "smtpPort": 587,
+            "auth": { "username": "foo", "password": "bar" },
+            "from": "noreply@watcher.org",
+            "to": ["foo@bar.com"]
+        }
+    }
+}

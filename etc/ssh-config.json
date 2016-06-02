@@ -1,0 +1,37 @@
+{
+    "defaultSchedule": {
+        "interval": "10s",
+        "retries": {
+            "attempts": 1,
+            "delay": "1s",
+            "exponentialBackoff": false
+        }
+    },
+    "pingers": [
+        {
+            "name": "localhost-diskusage",
+            "description": "verifies disk usage below 30%",
+            "type": "ssh",
+            "check": {
+                "host": "localhost",
+                "port": 22,
+                "auth": { "username": "foo", "key": "/home/foo/.ssh/id_rsa" },
+                "commandFile": "./etc/diskusage.sh",
+                "timeout": "10s",
+                "expect": {
+                    "exitCode": 0
+                }                
+            }            
+        }        
+    ],
+    "alerter": {
+        "reminderDelay": "12h",
+        "email": {
+            "smtpHost": "smtp.server",
+            "smtpPort": 587,
+            "auth": { "username": "foo", "password": "bar" },
+            "from": "noreply@watcher.org",
+            "to": ["foo@bar.com"]
+        }
+    }
+}

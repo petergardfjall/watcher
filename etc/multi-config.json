@@ -1,0 +1,69 @@
+{
+    "pingers": [
+        {
+            "name": "google.com",
+            "type": "http",
+            "check": {
+                "url": "https://www.google.com",
+                "expect": { "statusCode": 200 }
+            }
+        },
+        {
+            "name": "local-server",
+            "type": "http",
+            "check": {
+                "url": "https://localhost:12345/missing/",
+                "verifyCert": false,
+                "basicAuth": { "username": "foo", "password": "bar" },
+                "expect": { "statusCode": 404 }
+            }
+        },                
+        {
+            "name": "localhost-diskusage",
+            "description": "verifies disk usage below 30%",
+            "type": "ssh",
+            "check": {
+                "host": "localhost", "port": 22,
+                "auth": { "username": "foo", "key": "/home/foo/.ssh/id_rsa" },
+                "commandFile": "./etc/diskusage.sh",
+                "expect": {
+                    "exitCode": 0
+                }                
+            }            
+        },
+        {
+            "name": "localhost-docker-running",
+            "type": "ssh",
+            "check": {
+                "host": "localhost", "port": 22,
+                "auth": { "username": "foo", "password": "bar" },
+                "command": "service docker status | grep running",
+                "expect": {
+                    "exitCode": 0
+                }                
+            }            
+        },
+        {
+            "name": "remote-docker-running",
+            "type": "ssh",
+            "check": {
+                "host": "some.host", "port": 22,
+                "auth": { "username": "foo", "agent": true },
+                "command": "service docker status | grep running",
+                "expect": {
+                    "exitCode": 0
+                }                
+            }            
+        }                        
+    ],
+    "alerter": {
+        "reminderDelay": "12h",
+        "email": {
+            "smtpHost": "smtp.host",
+            "smtpPort": 25,
+            "auth": { "username": "foo", "password": "bar" },
+            "from": "noreply@watcher.org",
+            "to": ["foo@bar.com"]
+        }
+    }
+}
