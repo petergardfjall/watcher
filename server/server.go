@@ -105,7 +105,7 @@ func (server *Server) pingerOutput(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if pinger.Output == nil {
-		http.Error(w, fmt.Sprintf("%s: no output has been recorded (yet) for pinger", http.StatusText(http.StatusNotFound)), http.StatusNotFound)
+		http.Error(w, fmt.Sprintf("%s: no output recorded by pinger", http.StatusText(http.StatusNotFound)), http.StatusNotFound)
 		return
 	}
 
