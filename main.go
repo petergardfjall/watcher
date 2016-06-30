@@ -1,13 +1,13 @@
 package main
 
 import (
-	"github.com/petergardfjall/watcher/config"
-	"github.com/petergardfjall/watcher/engine"
-	"github.com/petergardfjall/watcher/server"
 	"encoding/json"
 	"flag"
 	"fmt"
 	"github.com/op/go-logging"
+	"github.com/petergardfjall/watcher/config"
+	"github.com/petergardfjall/watcher/engine"
+	"github.com/petergardfjall/watcher/server"
 	"io/ioutil"
 	"net"
 	"net/http"
@@ -40,8 +40,8 @@ var (
 	ipDetectionURL = "http://ipecho.net/plain"
 
 	// Server certificate and key for HTTPS
-	certFile = "/etc/watcherd/cert.pem"
-	keyFile  = "/etc/watcherd/key.pem"
+	certFile = "/etc/watcher/cert.pem"
+	keyFile  = "/etc/watcher/key.pem"
 )
 
 func initLogging() {

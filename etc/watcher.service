@@ -1,0 +1,11 @@
+[Unit]
+Description=Watcher Remote Server Monitoring
+Documentation=https://github.com/petergardfjall/watcher
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+ExecStart=/usr/local/bin/watcher --log-level INFO --certfile /etc/watcher/cert.pem --keyfile /etc/watcher/key.pem --port 3344 /etc/watcher/config.json
+
+[Install]
+WantedBy=multi-user.target

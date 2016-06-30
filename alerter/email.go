@@ -1,9 +1,9 @@
 package alerter
 
 import (
-	"github.com/petergardfjall/watcher/config"
 	"encoding/json"
 	"fmt"
+	"github.com/petergardfjall/watcher/config"
 	"net/smtp"
 )
 
@@ -55,7 +55,7 @@ func (emailAlerter *EmailAlerter) message(update *PingerUpdate) ([]byte, error) 
 		status = "NOT OK"
 	}
 
-	subject := fmt.Sprintf("[watcherd] pinger [%s] is %s", update.Name, status)
+	subject := fmt.Sprintf("[watcher] pinger [%s] is %s", update.Name, status)
 	headers := fmt.Sprintf("From: %s\r\nSubject: %s\r\n", conf.From, subject)
 
 	body, err := json.MarshalIndent(update, "", "    ")
